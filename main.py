@@ -19,19 +19,18 @@ class Manager():
         # Start all parser components via the Parsers wrapper
         self.parsers.start()
 
-    def find_all_keybindings(self):
-        # This is a placeholder function. You would need to implement the logic to find all keybindings from Inkscape.
-        key_list = list(string.ascii_lowercase)
-        key_list += ["SHIFT+" + c for c in string.ascii_lowercase]
-        key_list += ["Space"]
-        return key_list
+    # def find_all_keybindings(self):
+    #     # This is a placeholder function. You would need to implement the logic to find all keybindings from Inkscape.
+    #     key_list = list(string.ascii_lowercase)
+    #     key_list += ["SHIFT+" + c for c in string.ascii_lowercase]
+    #     key_list += ["Space"]
+    #     return key_list
 
 def main():
     manager = Manager(config)
     # if there is args --generate-config, then generate the config file and exit
     if len(sys.argv) > 1 and sys.argv[1] in {"--generate-config", "--gen-config", "-g"}:
-        keybindings = manager.find_all_keybindings()
-        hyprland_config = HyprlandPlugin.generate_hyprland_config(keybindings)
+        hyprland_config = HyprlandPlugin.generate_hyprland_config()
         hyprland_config_file = str(manager.config['hyprland_config_file'])
         with open(hyprland_config_file + ".real.conf", 'w') as f:
             f.write(hyprland_config)
