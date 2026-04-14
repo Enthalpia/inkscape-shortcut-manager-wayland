@@ -43,10 +43,8 @@ def main():
         # Create a soft link to the blank config file by default
         if os.path.exists(hyprland_config_file + '.conf'):
             os.remove(hyprland_config_file + '.conf')
-        os.symlink(hyprland_config_file + ".blank.conf", hyprland_config_file + '.conf', target_is_directory=False)
+        os.symlink(hyprland_config_file + ".real.conf", hyprland_config_file + '.conf', target_is_directory=False)
         return
-    # reload hyprland to apply the config changes
-    HyprlandPlugin.reload_hyprland()
     manager.start()
 
     try:
