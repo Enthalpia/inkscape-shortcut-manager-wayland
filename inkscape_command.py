@@ -31,6 +31,10 @@ class InkscapeProcess():
             self.log_queue.put(f"Pasted style for command: {command}")
             self.paste_style(cmd_set)
             return "style"
+        else:
+            self.log_queue.put(f"Unrecognized command: {command}")
+            subprocess.run(HyprlandPlugin.keybind_to_wtype(cmd_str))
+            return "unrecognized"
     
     def command_to_tool(self, cmd_str):
         """ Map a command to the corresponding Inkscape tool. This is a simple mapping based on the command content. """

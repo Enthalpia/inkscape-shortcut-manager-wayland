@@ -38,8 +38,6 @@ def main():
             print("Please include this file in your Hyprland config with the following line:")
             print(f"source = {hyprland_config_file + '.conf'}\n")
             print("Also, run \'hyprctl reload\' to apply the changes.")
-        with open(hyprland_config_file + ".blank.conf", 'w') as f:
-            f.write("# This is a blank config file used to disable the Inkscape keybindings when Inkscape is not active.\n")
         # Create a soft link to the blank config file by default
         if os.path.exists(hyprland_config_file + '.conf'):
             os.remove(hyprland_config_file + '.conf')

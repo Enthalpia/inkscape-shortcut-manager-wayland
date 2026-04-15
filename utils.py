@@ -61,6 +61,7 @@ class HyprlandPlugin():
                 subprocess.run(['hyprctl', 'dispatch', 'submap', 'Inkscape'])
             else:
                 subprocess.run(['hyprctl', 'dispatch', 'submap', 'reset'])
+            time.sleep(0.3) # Give it a moment to apply the submap change
         except FileNotFoundError:
             # if the destination doesn't exist for removal, ignore
             pass
@@ -130,12 +131,12 @@ class HyprlandPlugin():
             else:
                 key = f"-k {part}"
         modifier_str = ' '.join(modifiers)
-        modifiers_str_release = ' '.join(m.replace('-M', '-m') for m in modifiers)
         if modifier_str:
-            modifier_str = f"-m SHIFT -m CTRL {modifier_str} {key} {modifiers_str_release}"
+            modifiers_str_release = ' '.join(m.replace('-M', '-m') for m in modifiers)
+            modifier_str = f"{modifier_str} {key} {modifiers_str_release}"
             return ["wtype"] + modifier_str.split()
         else:
-            return ["wtype"] + f"-m SHIFT -m CTRL {key}".split()
+            return ["wtype"] + f"{key}".split()
     
     @staticmethod
     def get_clipboard_content(target=None):
