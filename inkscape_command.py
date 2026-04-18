@@ -240,6 +240,8 @@ class InkscapeProcess():
                 xml:space="preserve"><tspan sodipodi:role="line" >{content}</tspan></text>
             </svg> """
             clipboard_copy(svg, target=global_var.INKSCAPE_TARGET)
+            while(not global_var.IS_INKSCAPE_ACTIVE):
+                time.sleep(0.1) # Wait until Inkscape is active again before sending paste command
             try:
                 subprocess.run(HyprlandPlugin.keybind_to_wtype("Ctrl+v"))
                 self.log_queue.put('Typed Ctrl+v via wtype for new text')
@@ -263,6 +265,8 @@ class InkscapeProcess():
             svg = SVGPlugin.change_tspan_content(original_xml, content)
             self.log_queue.put(f"Generated SVG for edited text:\n{svg}\n")
             clipboard_copy(svg, target=global_var.INKSCAPE_TARGET)
+            while(not global_var.IS_INKSCAPE_ACTIVE):
+                time.sleep(0.1) # Wait until Inkscape is active again before sending paste command
             try:
                 subprocess.run(HyprlandPlugin.keybind_to_wtype("Ctrl+Alt+v"))
                 self.log_queue.put('Typed Ctrl+Alt+v via wtype for edited text')

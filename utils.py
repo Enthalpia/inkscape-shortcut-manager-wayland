@@ -107,7 +107,7 @@ class HyprlandPlugin():
             conf_str += f"bindr = SHIFT, {key}, exec, echo -n \"SHIFT+{key}\" | nc localhost {config['socket_port']}\n"
         conf_str += f"bind = , Space, exec, echo -n \"Space\" | nc localhost {config['socket_port']}\n"
         conf_str += textwrap.dedent("""
-        bind = CTRL, escape, submap, reset
+        bind = ALT, I, submap, reset
         submap = reset
         """)
         return conf_str
@@ -134,6 +134,7 @@ class HyprlandPlugin():
         if modifier_str:
             modifiers_str_release = ' '.join(m.replace('-M', '-m') for m in modifiers)
             modifier_str = f"{modifier_str} {key} {modifiers_str_release}"
+            print(["wtype"] + modifier_str.split())
             return ["wtype"] + modifier_str.split()
         else:
             return ["wtype"] + f"{key}".split()
